@@ -19,10 +19,6 @@ class RescaleT(object):
 
 		new_h, new_w = int(new_h), int(new_w)
 
-		# #resize the image to new_h x new_w and convert image from range [0,255] to [0,1]
-		# img = transform.resize(image,(new_h,new_w),mode='constant')
-		# lbl = transform.resize(label,(new_h,new_w),mode='constant', order=0, preserve_range=True)
-
 		img = transform.resize(image,(self.output_size,self.output_size),mode='constant')
 		lbl = transform.resize(label,(self.output_size,self.output_size),mode='constant', order=0, preserve_range=True)
 
@@ -49,7 +45,6 @@ class Rescale(object):
 
 		new_h, new_w = int(new_h), int(new_w)
 
-		# #resize the image to new_h x new_w and convert image from range [0,255] to [0,1]
 		img = transform.resize(image,(new_h,new_w),mode='constant')
 		lbl = transform.resize(label,(new_h,new_w),mode='constant', order=0, preserve_range=True)
 
@@ -70,7 +65,6 @@ class CenterCrop(object):
 		h, w = image.shape[:2]
 		new_h, new_w = self.output_size
 
-		# print("h: %d, w: %d, new_h: %d, new_w: %d"%(h, w, new_h, new_w))
 		assert((h >= new_h) and (w >= new_w))
 
 		h_offset = int(math.floor((h - new_h)/2))
@@ -104,9 +98,10 @@ class RandomCrop(object):
 
 		return {'image': image, 'label': label}
 
-class ToTensor(object):
-	"""Convert ndarrays in sample to Tensors."""
+# Convert arrays to Tensor	
 
+class ToTensor(object):
+	
 	def __call__(self, sample):
 
 		image, label = sample['image'], sample['label']
@@ -131,7 +126,7 @@ class ToTensor(object):
 
 		tmpLbl[:,:,0] = label[:,:,0]
 
-		# change the r,g,b to b,r,g from [0,255] to [0,1]
+		# change [0,255] to [0,1]
 		#transforms.Normalize(mean = (0.485, 0.456, 0.406), std = (0.229, 0.224, 0.225))
 		tmpImg = tmpImg.transpose((2, 0, 1))
 		tmpLbl = label.transpose((2, 0, 1))
@@ -140,7 +135,6 @@ class ToTensor(object):
 			'label': torch.from_numpy(tmpLbl)}
 
 class ToTensorLab(object):
-	"""Convert ndarrays in sample to Tensors."""
 	def __init__(self,flag=0):
 		self.flag = flag
 
@@ -184,7 +178,7 @@ class ToTensorLab(object):
 			tmpImg[:,:,4] = (tmpImg[:,:,4]-np.mean(tmpImg[:,:,4]))/np.std(tmpImg[:,:,4])
 			tmpImg[:,:,5] = (tmpImg[:,:,5]-np.mean(tmpImg[:,:,5]))/np.std(tmpImg[:,:,5])
 
-		elif self.flag == 1: #with Lab color
+		elif self.flag == 1: 
 			tmpImg = np.zeros((image.shape[0],image.shape[1],3))
 
 			if image.shape[2]==1:
@@ -206,7 +200,7 @@ class ToTensorLab(object):
 			tmpImg[:,:,1] = (tmpImg[:,:,1]-np.mean(tmpImg[:,:,1]))/np.std(tmpImg[:,:,1])
 			tmpImg[:,:,2] = (tmpImg[:,:,2]-np.mean(tmpImg[:,:,2]))/np.std(tmpImg[:,:,2])
 
-		else: # with rgb color
+		else: 
 			tmpImg = np.zeros((image.shape[0],image.shape[1],3))
 			image = image/np.max(image)
 			if image.shape[2]==1:
@@ -222,8 +216,6 @@ class ToTensorLab(object):
 
 		tmpLbl[:,:,0] = label[:,:,0]
 
-		# change the r,g,b to b,r,g from [0,255] to [0,1]
-		#transforms.Normalize(mean = (0.485, 0.456, 0.406), std = (0.229, 0.224, 0.225))
 		tmpImg = tmpImg.transpose((2, 0, 1))
 		tmpLbl = label.transpose((2, 0, 1))
 
