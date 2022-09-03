@@ -8,5 +8,15 @@ This is the official PyTorch implementation of the paper Revise-Net: Exploiting 
 
 ## Prerequisites
 
-## Citation.
+## Citation
+```
+@Article{remotesensing13234941,
+author = {},
+title = {},
+journal = {},
+volume = {},
+year = {}, 
+ARTICLE-NUMBER = {}
+}
+```
  
