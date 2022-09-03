@@ -8,5 +8,5 @@ This is the official PyTorch implementation of the paper Revise-Net: Exploiting 
 
 ## Prerequisites
 
-## Citation
+## Citation.
  
