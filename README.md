@@ -17,7 +17,7 @@ journal = {Remote Sensing},
 volume = {13},
 year = {2021}, 
 ARTICLE-NUMBER = {4941},
-URL = {[https://www.mdpi.com/2072-4292/13/23/4941](https://www.mdpi.com/2072-4292/13/23/4941)},
+URL = {[https://www.mdpi.com/2072-4292/13/23/4941][https://www.mdpi.com/2072-4292/13/23/4941]},
 DOI = {10.3390/rs13234941}
 }
 ```
